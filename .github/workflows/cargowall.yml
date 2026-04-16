@@ -1,0 +1,17 @@
+name: CargoWall Hello World
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  cargowall:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actionforge/action@v0.15.4
+        with:
+          graph-file: cargowall-hello-world.act

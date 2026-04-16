@@ -1,0 +1,63 @@
+editor:
+  version:
+    created: v1.58.0
+entry: gh-start
+type: github
+nodes:
+  - id: gh-start
+    type: core/gh-start@v1
+    position:
+      x: -70
+      y: 590
+  - id: cargowall
+    type: >-
+      github.com/code-cargo/cargowall-action@2c11914f7e4e4f1102af5d971899c2f1184bf7fb
+    position:
+      x: 340
+      y: 820
+    inputs:
+      mode: enforce
+      allowed-hosts: |
+        github.com
+        api.github.com
+  - id: curl-allowed
+    type: core/run@v1
+    position:
+      x: 910
+      y: 720
+    inputs:
+      shell: bash
+      script: |
+        echo "Calling allowed host: github.com"
+        curl -sf --connect-timeout 5 https://github.com -o /dev/null
+        echo "OK: github.com responded"
+  - id: curl-blocked
+    type: core/run@v1
+    position:
+      x: 1400
+      y: 640
+    inputs:
+      shell: bash
+      script: |
+        echo "Calling blocked host: example.com"
+        curl -sf --connect-timeout 5 https://example.com
+connections: []
+executions:
+  - src:
+      node: gh-start
+      port: exec-on_push
+    dst:
+      node: cargowall
+      port: exec
+  - src:
+      node: cargowall
+      port: exec-success
+    dst:
+      node: curl-allowed
+      port: exec
+  - src:
+      node: curl-allowed
+      port: exec-success
+    dst:
+      node: curl-blocked
+      port: exec
