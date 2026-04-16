@@ -22,26 +22,21 @@ nodes:
         github.com
         api.github.com
   - id: curl-allowed
-    type: core/run@v1
+    type: core/http@v1
     position:
       x: 980
       y: -10
     inputs:
-      shell: bash
-      script: |
-        echo "Calling allowed host: github.com"
-        curl -sf --connect-timeout 5 https://github.com -o /dev/null
-        echo "OK: github.com responded"
+      method: GET
+      url: https://github.com
   - id: curl-blocked
-    type: core/run@v1
+    type: core/http@v1
     position:
       x: 1380
       y: 10
     inputs:
-      shell: bash
-      script: |
-        echo "Calling blocked host: example.com"
-        curl -sf --connect-timeout 5 https://example.com
+      method: GET
+      url: https://example.com
 connections: []
 executions:
   - src:
