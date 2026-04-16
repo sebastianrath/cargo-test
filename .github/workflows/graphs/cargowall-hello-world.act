@@ -27,7 +27,7 @@ nodes:
       x: 980
       y: -10
     inputs:
-      method: GET
+      method: get
       url: https://github.com
   - id: curl-blocked
     type: core/http@v1
@@ -35,7 +35,7 @@ nodes:
       x: 1380
       y: 10
     inputs:
-      method: GET
+      method: get
       url: https://example.com
 connections: []
 executions:
