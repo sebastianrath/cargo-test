@@ -7,14 +7,14 @@ nodes:
   - id: gh-start
     type: core/gh-start@v1
     position:
-      x: -70
-      y: 590
+      x: 10
+      y: 10
   - id: cargowall
     type: >-
       github.com/code-cargo/cargowall-action@2c11914f7e4e4f1102af5d971899c2f1184bf7fb
     position:
-      x: 340
-      y: 820
+      x: 400
+      y: 10
     inputs:
       mode: enforce
       allowed-hosts: |
@@ -23,8 +23,8 @@ nodes:
   - id: curl-allowed
     type: core/run@v1
     position:
-      x: 910
-      y: 720
+      x: 980
+      y: -10
     inputs:
       shell: bash
       script: |
@@ -34,8 +34,8 @@ nodes:
   - id: curl-blocked
     type: core/run@v1
     position:
-      x: 1400
-      y: 640
+      x: 1380
+      y: 10
     inputs:
       shell: bash
       script: |
