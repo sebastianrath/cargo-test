@@ -16,6 +16,7 @@ nodes:
       x: 400
       y: 10
     inputs:
+      job-id: cargowall
       mode: enforce
       allowed-hosts: |
         github.com
