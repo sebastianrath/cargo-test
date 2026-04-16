@@ -21,7 +21,7 @@ nodes:
       allowed-hosts: |
         github.com
         api.github.com
-  - id: curl-allowed
+  - id: http-allowed
     type: core/http@v1
     position:
       x: 980
@@ -29,7 +29,7 @@ nodes:
     inputs:
       method: get
       url: https://github.com
-  - id: curl-blocked
+  - id: http-blocked
     type: core/http@v1
     position:
       x: 1380
@@ -49,11 +49,11 @@ executions:
       node: cargowall
       port: exec-success
     dst:
-      node: curl-allowed
+      node: http-allowed
       port: exec
   - src:
-      node: curl-allowed
+      node: http-allowed
       port: exec-success
     dst:
-      node: curl-blocked
+      node: http-blocked
       port: exec
